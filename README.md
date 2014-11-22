@@ -1,0 +1,4 @@
+MusicAlbum
+==========
+
+JavaScript Application Teamwork
