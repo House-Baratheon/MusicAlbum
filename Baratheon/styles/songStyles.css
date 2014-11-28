@@ -1,0 +1,70 @@
+.song *, .song {
+    border: solid 1px red;
+}
+
+h1, div, section{
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+}
+
+html {
+    font-size: 10px;
+}
+
+.song {
+    width: 80rem;
+    margin-top: 25px;
+    font-size: 16px;
+}
+
+.song > section, .playButton, .song header>div,
+.songIcon,  footer section {
+    display: inline-block;
+    vertical-align: top;
+}
+
+.song .duration {
+    float: right;
+}
+
+.song > section {
+    width: 60rem;
+    margin-left: 1rem;
+}
+
+.songName {
+    font-size: 25px;
+    margin-top: 5px;
+}
+
+.songIcon{
+    width: 100px;
+    background-color: #fff;
+}
+
+.song > section, .song .songIcon {
+    height: 100px;
+}
+
+.playButton {
+    width: 60px;
+    height: 60px;
+    text-align: center;
+    line-height: 60px;
+    margin-bottom: 12px;
+    margin-right: 10px;
+}
+
+.song footer, {
+    display: inline-block;
+    vertical-align: bottom;
+}
+
+.song footer section:nth-child(2){
+    float: right;
+}
+
