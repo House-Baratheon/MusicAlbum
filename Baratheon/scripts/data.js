@@ -32,7 +32,13 @@ app.data = (function(){
         };
 
         Table.prototype.readAllRowsWhere = function (column, value, successFunction, errorFunction) {
-            requester.get(this._dataUrl + + '?where={"' + column + '": ' + value + '}',
+            if(value instanceof Object){
+                value = JSON.stringify(value);
+            } else {
+                value = '"' + value + '"';
+            }
+
+            requester.get(this._dataUrl  + '?where={"' + column + '": ' + value + '}',
                 this._service.headers, successFunction, errorFunction);
         };
 
