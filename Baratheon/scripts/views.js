@@ -13,6 +13,7 @@ app.views = (function () {
             $song.find('.genre').text(song.genre);
             $song.find('.album').text(song.album);
             $song.find('.rating').text(song.rating);
+            $song.find('.upload-button-link').attr('href', song.file.url);
             $songsContainer.append($song);
        });
     }

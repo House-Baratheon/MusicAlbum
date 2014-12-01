@@ -102,3 +102,7 @@ html {
     text-decoration: underline;
 }
 
+button a {
+    text-decoration: none;
+    color: black;
+}
