@@ -7,14 +7,14 @@ app.controller = (function () {
     }
 
     Controller.prototype.load = function () {
-        loadSongs.call(this, 'body');
+        loadSongs.call(this);
         attachEvents.call(this);
     };
 
     function loadSongs(column, value) {
         var _this = this;
         _this._views.getSongsContainer().html('');
-        function successSongFunction (dataSongs) {
+        function successSongFunction(dataSongs) {
             _this._data.users.readAllRows(function (dataUploader) {
                     var uploaders = [];
 
@@ -36,14 +36,14 @@ app.controller = (function () {
             console.log('Can not read songs');
         }
 
-        if(column && value){
+        if (column && value) {
             _this._data.songs.readAllRowsWhere(column, value, successSongFunction, errorSongsFunction);
         } else {
             _this._data.songs.readAllRows(successSongFunction, errorSongsFunction);
         }
     }
 
-    function attachEvents(){
+    function attachEvents() {
         var _this = this;
         _this._views.getSongsContainer().on('click', '.album', function (e) {
             var album = $(e.target).text();
@@ -66,6 +66,27 @@ app.controller = (function () {
             loadSongs.call(_this, 'genre', genre);
         });
 
+        _this._views.getSongsContainer().on('click', '.deleteSong', function (e) {
+            var songId = $(e.target).parent().attr('id');
+            _this._data.songs.deleteRow(songId, function () {
+                    console.log('The song was deleted successful.');
+                    loadSongs.call(_this);
+                },
+                function () {
+                    console.log('Can not delete song.');
+                });
+        });
+
+        _this._views.getSongsContainer().on('click', '.editSong', function (e) {
+            var songId = $(e.target).parent().attr('id');
+            _this._data.songs.readAllRowsWhere('objectId' , songId, function (song) {
+                _this._views.songForm(song);
+            },
+                function () {
+                    console.log('Can not read songData.');
+                });
+        });
+
         $('#showAll').on('click', function (e) {
             var genre = $(e.target).text();
             loadSongs.call(_this);
@@ -73,8 +94,8 @@ app.controller = (function () {
     }
 
     return {
-        get: function(data, views){
-           return  new Controller(data, views);
+        get: function (data, views) {
+            return new Controller(data, views);
         }
     }
 })();

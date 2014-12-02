@@ -1,3 +1,15 @@
 button {
     cursor: pointer;
 }
+
+main {
+    width: 100%;
+    position: relative;
+}
+
+.forms {
+    position: absolute;
+    width: 100%;
+    left: 0;
+    top: 0;
+}

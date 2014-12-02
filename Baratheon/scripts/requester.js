@@ -32,7 +32,7 @@ var requester = (function(){
     return {
         get: makeGetRequest,
         post: makePostRequest,
-        put: makeDeleteRequest,
-        delete: makePutRequest
+        put: makePutRequest,
+        delete: makeDeleteRequest
     }
 })();

@@ -51,7 +51,7 @@ app.data = (function(){
         };
 
         Table.prototype.deleteRow = function (objectId, successFunction, errorFunction) {
-            requester.delete( his._dataUrl + '/' + objectId, this._service.headers, successFunction, errorFunction);
+            requester.delete( this._dataUrl + '/' + objectId, this._service.headers, successFunction, errorFunction);
         };
 
         return Table;
