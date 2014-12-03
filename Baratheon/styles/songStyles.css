@@ -30,8 +30,8 @@ html {
     border: solid 1px #000;
 }
 
-.song > section, .playButton, .song header > div,
-.songIcon, footer section {
+.song > section, .playButton, .song .songHeader > div,
+.songIcon, .songFooter section {
     display: inline-block;
     vertical-align: top;
 }
@@ -73,12 +73,12 @@ html {
     margin-right: 10px;
 }
 
-.song footer, {
+.song .songFooter, {
     display: inline-block;
     vertical-align: bottom;
 }
 
-.song footer section:nth-child(2) {
+.song .songFooter section:nth-child(2) {
     float: right;
 }
 
