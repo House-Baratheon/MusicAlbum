@@ -1,0 +1,44 @@
+.logo{
+    width: 153px;
+    height: 121px;
+    margin: 10px;
+    padding-bottom: 32px;
+    margin-left: 7em;
+    margin-top: -11em;
+}
+.imgLogo{
+    max-width: 100%;
+    border-radius: 20px;
+}
+#header{
+    max-width: 120em;
+    margin: 10px;
+    padding: 10px;
+    margin:  0 auto;
+    background-color:#ccccff;
+}
+.navMenu{
+    margin-top: 7em;
+    margin-left: 25em;
+}
+.navMenu ul li{
+    display: inline-block;
+    text-decoration: none;
+    padding: 10px;
+    padding-left: 20px;
+    font-size: 20px;
+    background-color: #ffffff;
+    border-radius: 2px;
+    box-shadow: 10px 10px 5px #888888;
+    transition: all .2s linear;
+}
+.navMenu ul li a{
+   text-decoration: none;
+   color: black;
+}
+.navMenu ul li a:hover{
+   cursor: pointer;
+}
+.navMenu ul li:hover{
+    background-color: #EFEFEF;
+}

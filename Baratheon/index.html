@@ -14,66 +14,25 @@
     <script src="scripts/controller.js" defer></script>
     <script src="scripts/confirmation-form.js" defer></script>
     <script src="scripts/main.js" defer></script>
+    <link href="./styles/hesderStyle.css" rel="stylesheet" type="text/css"/>
+    <script src="scripts/load.js" type="text/javascript"></script>
+    <link href="styles/sectionStyle.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
-    <header>
-        <nav>Header</nav>
-    </header>
-    <main>
-        <form id="fileupload" name="fileupload" enctype="multipart/form-data" method="post">
-            <fieldset>
-                <input type="file" name="fileselect" id="fileselect"></input>
-                <input id="uploadbutton" type="button" value="Upload to Parse"/>
-            </fieldset>
-        </form>
-        <div id="songs"></div>
-        <!--<video controls="" autoplay="" name="media"><source src="http://files.parsetfss.com/a3e50472-688f-4a42-afda-df6af4172933/tfss-d1edd5f5-1c7b-4fc0-9dd6-da1d66412c61-BadCopy-UgovorSaKepom.mp3" type="audio/mp3"></video>    -->
-        <br/><br/><br/>
-        <button id="showAll">Show All Songs</button>
-        <br/><br/><br/>
-        <div>Кликни върху Genre, Album или Uploader</div>
-    </main>
-        <aside>
-
-    </aside>
-    <footer></footer>
-    <script type="text/javascript" defer>
-            var file;
-            // Set an event listener on the Choose File field.
-            $('#fileselect').on("change", function(e) {
-                var files = e.target.files || e.dataTransfer.files;
-                // Our file var now holds the selected file
-                file = files[0];
-            });
-
-            // This function is called when the user clicks on Upload to Parse. It will create the REST API request to upload this image to Parse.
-            $('#uploadbutton').click(function() {
-                var serverUrl = 'https://api.parse.com/1/files/' + file.name;
-                
-              if (file.type === 'audio/mp3') {
-                    $.ajax({
-                        type: "POST",
-                        beforeSend: function(request) {
-                            request.setRequestHeader("X-Parse-Application-Id", 'R9zGRvhWmcjTARZq5MFxBUB3P1RULW3aumZG4ALm');
-                            request.setRequestHeader("X-Parse-REST-API-Key", 'aXcHxh3r16S0aF11lfxwassPTkZb5ztq5CwtiU7X');
-                            request.setRequestHeader("Content-Type", file.type);
-                        },
-                        url: serverUrl,
-                        data: file,
-                        processData: false,
-                        contentType: false,
-                        success: function(data) {
-                            alert("success");
-                        },
-                        error: function(data) {
-                            var obj = jQuery.parseJSON(data);
-                            alert(obj.error);
-                        }
-                    });
-                } else {
-                    alert("Test");
-                }
-            });
-    </script>
+    <header id="header"></header>
+    <br />
+    <br />
+    <section id="section">
+        <main>
+            <div id="songs"></div>
+            <!--<video controls="" autoplay="" name="media"><source src="http://files.parsetfss.com/a3e50472-688f-4a42-afda-df6af4172933/tfss-d1edd5f5-1c7b-4fc0-9dd6-da1d66412c61-BadCopy-UgovorSaKepom.mp3" type="audio/mp3"></video>    -->
+            <br/><br/><br/>
+            <button id="showAll">Show All Songs</button>
+            <br/>
+            <br/>
+            <br/>
+        </main>
+    </section>
+    <footer id="footer"></footer>
 </body>
 </html>

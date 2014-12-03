@@ -1,16 +1,3 @@
-/*.song *, .song {*/
-/*border: solid 1px red;*/
-/*}*/
-
-h1, div, section {
-    margin: 0;
-    padding: 0;
-    border: 0;
-    font-size: 100%;
-    font: inherit;
-    vertical-align: baseline;
-}
-
 html {
     font-size: 10px;
 }
