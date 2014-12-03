@@ -68,20 +68,31 @@ app.controller = (function () {
 
         _this._views.getSongsContainer().on('click', '.deleteSong', function (e) {
             var songId = $(e.target).parent().attr('id');
-            _this._data.songs.deleteRow(songId, function () {
-                    console.log('The song was deleted successful.');
-                    loadSongs.call(_this);
-                },
-                function () {
-                    console.log('Can not delete song.');
-                });
+            app.confirmationForm.show('#' + songId, 'Do you want to delete this song?', function () {
+                _this._data.songs.deleteRow(songId, function () {
+                        console.log('The song was deleted successful.');
+                        loadSongs.call(_this);
+                    },
+                    function () {
+                        console.log('Can not delete song.');
+                    });
+            });
         });
 
         _this._views.getSongsContainer().on('click', '.editSong', function (e) {
-            var songId = $(e.target).parent().attr('id');
-            _this._data.songs.readAllRowsWhere('objectId' , songId, function (song) {
-                _this._views.songForm(song);
-            },
+            var $form = $(e.target).parent();
+            var songId = $form.attr('id');
+            _this._data.songs.readAllRowsWhere('objectId', songId, function (song) {
+                    _this._views.songForm(song[0], function(songObj){
+                        _this._data.songs.editRow(songId, songObj, function () {
+                            console.log('The song is edited.');
+                            loadSongs.call(_this);
+                        }, function () {
+                            console.log('The song is not edited.');
+                        });
+                    });
+
+                },
                 function () {
                     console.log('Can not read songData.');
                 });

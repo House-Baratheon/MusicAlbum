@@ -22,24 +22,37 @@ app.views = (function () {
         });
     }
 
-    function songForm(song){
+    function songForm(song, saveFunction){
         var $songForm = $('<div class="forms">').load('htmlElements/songForm.html', function () {
             if(song){
                 $songForm.find('h1').text('Edit Song');
-                $songForm.find('#songName').val(song[0].name);
-                $songForm.find('#artist').val(song[0].artist);
-                $songForm.find('#genre').val(song[0].genre);
-                $songForm.find('#album').val(song[0].album);
-                $songForm.find('.controls').attr('id', song[0].objectId)
+                $songForm.find('#songName').val(song.name);
+                $songForm.find('#artist').val(song.artist);
+                $songForm.find('#genre').val(song.genre);
+                $songForm.find('#album').val(song.album);
+                $songForm.find('.controls').attr('id', song.objectId)
             }
         }, function () {
             console.log('Can not load songForm.html');
         });
+
         $songForm.hide();
         $formContainer.append($songForm);
         $songForm.on('click', '#cancelButton', function() {
-            $songForm.hide();
+            $songForm.remove();
         });
+
+        $songForm.on('click', '#saveButton', function() {
+            var songObj = {
+                name: $songForm.find('#songName').val(),
+                album: $songForm.find('album').val(),
+                artist:  $songForm.find('artist').val(),
+                genre:  $songForm.find('genre').val()
+            };
+            saveFunction(songObj);
+            $songForm.remove();
+        });
+
         $songForm.show();
     }
 
