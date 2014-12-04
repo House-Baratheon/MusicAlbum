@@ -1,6 +1,6 @@
 ﻿var objectUrl;
 
-$("#audio").on("canplaythrough", function (e) {
+$("#statistics audio").on("canplaythrough", function (e) {
     var seconds = e.currentTarget.duration;
     var duration = moment.duration(seconds, "seconds");
     
