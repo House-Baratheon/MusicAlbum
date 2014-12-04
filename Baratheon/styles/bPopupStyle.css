@@ -1,11 +1,11 @@
 #element_to_pop_up { 
     background-color:#fff;
-    border-radius:15px;
     color:#000;
     display:none; 
     padding:20px;
-    min-width:400px;
-    min-height: 180px;
+    min-width:700px;
+    min-height: 300px;
+    font-size: 20px;
 }
 .b-close{
     cursor:pointer;
