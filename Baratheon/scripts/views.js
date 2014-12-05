@@ -64,10 +64,28 @@ app.views = (function () {
         return $formContainer;
     }
 
+    // Form for adding a comment
+    function addComment (songSection) {
+        var $addComment = $('<section class="comments">').load('htmlElements/addComment.html',
+
+            function () {
+                console.log('addComment.html loaded successfully');
+                console.log($addComment);
+                songSection.append($addComment);
+            },
+
+            function () {
+                console.log('Can not load addComment.html');
+            }
+        );
+    }
+
+
     return {
         song: song,
         songForm: songForm,
         getSongsContainer: getSongsContainer,
-        getFormContainer: getFormContainer
+        getFormContainer: getFormContainer,
+        addComment: addComment
     };
 })();

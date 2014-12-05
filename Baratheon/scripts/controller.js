@@ -102,6 +102,22 @@ app.controller = (function () {
             var genre = $(e.target).text();
             loadSongs.call(_this);
         });
+
+        // Comments section appear after clicking the comments button
+        _this._views.getSongsContainer().on('click', '.commentsButton', function (event) {
+            var isClicked = $(event.target).attr('clicked');
+
+            console.log(isClicked);
+
+           if (!isClicked) {
+                var $songSection = $(event.target).parent().parent().parent();
+                _this._views.addComment($songSection);
+               $(event.target).attr('clicked', 'true');
+            } else {
+               $(event.target).attr('clicked', 'false');
+               $songSection.parent().remove('.comments');
+           }
+        });
     }
 
     return {
