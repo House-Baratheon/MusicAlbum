@@ -22,9 +22,9 @@ app.views = (function () {
         });
     }
 
-    function songForm(song, saveFunction){
+    function songEditForm(song, saveFunction) {
         var $songForm = $('<div class="forms">').load('htmlElements/songForm.html', function () {
-            if(song){
+            if (song) {
                 $songForm.find('h1').text('Edit Song');
                 $songForm.find('#songName').val(song.name);
                 $songForm.find('#artist').val(song.artist);
@@ -38,22 +38,63 @@ app.views = (function () {
 
         $songForm.hide();
         $formContainer.append($songForm);
-        $songForm.on('click', '#cancelButton', function() {
+        $songForm.on('click', '#cancelButton', function () {
             $songForm.remove();
         });
 
-        $songForm.on('click', '#saveButton', function() {
+        $songForm.on('click', '#saveButton', function () {
             var songObj = {
                 name: $songForm.find('#songName').val(),
-                album: $songForm.find('album').val(),
-                artist:  $songForm.find('artist').val(),
-                genre:  $songForm.find('genre').val()
+                album: $songForm.find('#album').val(),
+                artist: $songForm.find('#artist').val(),
+                genre: $songForm.find('#genre').val()
             };
             saveFunction(songObj);
             $songForm.remove();
         });
 
         $songForm.show();
+    }
+
+    function songUploadForm(yesFunction, noFunction) {
+        var $songForm = $('<div class="forms">').load('htmlElements/songUploadForm.html', function () {
+            var file,
+                files;
+            $songForm.find('#edit-forms').hide();
+            $formContainer.append($songForm);
+
+            $('#upload').on("change", function (e) {
+                files = e.target.files || e.dataTransfer.files;
+                file = files[0];
+                var url = file.name;
+                ID3.loadTags(url, function(){
+                    var tags = ID3.getAllTags(url);
+                    $songForm.find('#edit-forms').show();
+                    $songForm.find('#songName').val(tags.title);
+                    $songForm.find('#album').val(tags.album);
+                    $songForm.find('#artist').val(tags.artist);
+                    $songForm.find('#genre').val(tags.genre);
+                }, {tags: ["artist", "title", "album", "year", "comment", "track", "genre", "lyrics", "picture"],
+                    dataReader: FileAPIReader(file)});
+            });
+
+            $songForm.on('click', '#saveButton', function(){
+                var song = {
+                    name: $songForm.find('#songName').val(),
+                    artist: $songForm.find('#artist').val(),
+                    album : $songForm.find('#album').val(),
+                    genre: $songForm.find('#genre').val()
+                };
+
+                $songForm.remove();
+                yesFunction(file, song);
+            });
+
+            $songForm.on('click', '#cancelButton', function(){
+                $songForm.remove();
+                noFunction();
+            });
+        });
     }
 
     function getSongsContainer() {
@@ -83,7 +124,8 @@ app.views = (function () {
 
     return {
         song: song,
-        songForm: songForm,
+        songEditForm: songEditForm,
+        songUploadForm: songUploadForm,
         getSongsContainer: getSongsContainer,
         getFormContainer: getFormContainer,
         addComment: addComment

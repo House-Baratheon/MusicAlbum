@@ -6,10 +6,12 @@ app.controller = (function () {
         this._views = views;
     }
 
+
     Controller.prototype.load = function () {
         loadSongs.call(this);
         attachEvents.call(this);
     };
+
 
     function loadSongs(column, value) {
         var _this = this;
@@ -42,6 +44,7 @@ app.controller = (function () {
             _this._data.songs.readAllRows(successSongFunction, errorSongsFunction);
         }
     }
+
 
     function attachEvents() {
         var _this = this;
@@ -83,13 +86,16 @@ app.controller = (function () {
             var $form = $(e.target).parent();
             var songId = $form.attr('id');
             _this._data.songs.readAllRowsWhere('objectId', songId, function (song) {
-                    _this._views.songForm(song[0], function(songObj){
+                    _this._views.songEditForm(song[0], function (songObj) {
                         _this._data.songs.editRow(songId, songObj, function () {
                             console.log('The song is edited.');
                             loadSongs.call(_this);
-                        }, function () {
+                        }, function (error) {
                             console.log('The song is not edited.');
+                            console.log('Error: ' + error.error);
                         });
+                    }, function () {
+                        console.log('Click cancel button.')
                     });
 
                 },
@@ -97,6 +103,54 @@ app.controller = (function () {
                     console.log('Can not read songData.');
                 });
         });
+
+        $('body').on('click', '#upload-button', function (e) {
+            _this._views.songUploadForm(function (file, song) {
+                _this._data.files.upload(file, function (data) {
+                    var fileObj =
+                    {
+                        "__type": "File",
+                        "name": data.name,
+                        "url": data.url
+                    };
+
+                    var uploader =
+                    {
+                        "__type": "Pointer",
+                        "className": "_User",
+                        "objectId": "jmq0dTOLUO"
+                    };
+
+                    var songObj =
+                    {
+                        "album": song.album,
+                        "artist": song.artist,
+                        "duration": "2:46",
+                        "file": fileObj,
+                        "genre": song.genre,
+                        "name": song.name,
+                        "plays": 0,
+                        "rating": 0,
+                        "uploader": uploader
+                    };
+
+                    _this._data.songs.addRow(songObj, function () {
+                        loadSongs.call(_this);
+                        console.log('The song is added.')
+                    }, function (error) {
+                        console.log('The song is not added.');
+                        console.log('Error: ' + error.error);
+
+                    });
+
+                    _this._data.files.delete(data.name, file.type);
+                    console.log('Success upload.')
+                }), function () {
+                    console.log('The song is not uploaded.');
+                };
+            });
+        });
+
 
         $('#showAll').on('click', function (e) {
             var genre = $(e.target).text();
@@ -109,14 +163,14 @@ app.controller = (function () {
 
             console.log(isClicked);
 
-           if (!isClicked) {
+            if (!isClicked) {
                 var $songSection = $(event.target).parent().parent().parent();
                 _this._views.addComment($songSection);
-               $(event.target).attr('clicked', 'true');
+                $(event.target).attr('clicked', 'true');
             } else {
-               $(event.target).attr('clicked', 'false');
-               $songSection.parent().remove('.comments');
-           }
+                $(event.target).attr('clicked', 'false');
+                $songSection.parent().remove('.comments');
+            }
         });
     }
 
