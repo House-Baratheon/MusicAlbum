@@ -23,7 +23,7 @@ $('#uploadbutton').click(function() {
             processData: false,
             contentType: false,
             success: function(data) {
-                alert("success");
+                alert("success upload");
             },
             error: function(data) {
                 var obj = jQuery.parseJSON(data);
@@ -31,6 +31,6 @@ $('#uploadbutton').click(function() {
             }
         });
     } else {
-        alert("Test");
+        alert("Please choose a '.mp3' file");
     }
 });
