@@ -4,7 +4,7 @@
     margin: 10px;
     padding-bottom: 32px;
     margin-left: 7em;
-    margin-top: -11em;
+    margin-top: -13em;
 }
 .imgLogo{
     max-width: 100%;
@@ -19,25 +19,65 @@
 }
 .navMenu{
     margin-top: 7em;
-    margin-left: 25em;
+    margin-left: 45em;
 }
 .navMenu ul li{
     display: inline-block;
     text-decoration: none;
-    padding: 10px;
-    padding-left: 20px;
+   // padding: 10px;
+  //  padding-left: 20px;
     font-size: 20px;
-    background-color: #FEFF33;
+   // background-color: #FEFF33;
     border-radius: 2px;
     transition: all .2s linear;
+    padding-left: 26px;
+}
+.buttonImg{
+    width: 100px;
+    height: 100px;
 }
 .navMenu ul li a{
    text-decoration: none;
-   color: black;
+   color: #F25835;
 }
 .navMenu ul li a:hover{
    cursor: pointer;
 }
 .navMenu ul li:hover{
-    background-color: #EFEFEF;
+  //  background-color: #EFEFEF;
+  cursor: pointer;
+}
+.menuText{
+    font-size: 26px;
+    margin-left: 14px;
+    margin-top: -73px;
+    z-index: 200;
+}
+
+.navMenu ul li{
+    -webkit-transition-property: -webkit-transform;
+    -webkit-transition-duration: 1s;
+
+    -moz-transition-property: -moz-transform;
+    -moz-transition-duration: 1s;
+}
+.navMenu ul li:hover {
+    -webkit-animation-name: rotate; 
+    -webkit-animation-duration: 0.7s; 
+    -webkit-animation-iteration-count: infinite;
+    -webkit-animation-timing-function: linear;
+
+    -moz-animation-name: rotate; 
+    -moz-animation-duration: 0.7s; 
+    -moz-animation-iteration-count: infinite;
+    -moz-animation-timing-function: linear;
+}
+@-webkit-keyframes rotate {
+    from {-webkit-transform: rotate(0deg);}
+    to {-webkit-transform: rotate(360deg);}
+}
+
+@-moz-keyframes rotate {
+    from {-moz-transform: rotate(0deg);}
+    to {-moz-transform: rotate(360deg);}
 }
