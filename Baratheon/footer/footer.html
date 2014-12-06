@@ -1,1 +1,20 @@
 <h1>footer</h1>
+<div id="sm2-container">
+
+</div>
+<script>
+    soundManager.setup({
+        url: './libs/soundManager/swf/',
+        onready: function() {
+            var mySound = soundManager.createSound({
+                id: 'tUxjaYiZLt',
+                url: 'ttp://files.parsetfss.com/a3e50472-688f-4a42-afda-df6af4172933/tfss-4e0efdc5-1fc5-427a-a279-4d5f12afe4d6-david-hudson-bali-doo.mp3'
+            });
+            mySound.play();
+        },
+        ontimeout: function() {
+            // Hrmm, SM2 could not start. Missing SWF? Flash blocked? Show an error, etc.?
+        }
+    });
+</script>
+
