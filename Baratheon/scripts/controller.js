@@ -158,18 +158,18 @@ app.controller = (function () {
         });
 
         // Comments section appear after clicking the comments button
-        _this._views.getSongsContainer().on('click', '.commentsButton', function (event) {
+        _this._views.getSongsContainer().on('click', '.commentsButton', function test(event) {
             var isClicked = $(event.target).attr('clicked');
 
-            console.log(isClicked);
-
-            if (!isClicked) {
+            if(!isClicked) {
                 var $songSection = $(event.target).parent().parent().parent();
                 _this._views.addComment($songSection);
+                isClicked = $(event.target).attr('clicked', 'false');
+            }else  {
                 $(event.target).attr('clicked', 'true');
-            } else {
-                $(event.target).attr('clicked', 'false');
-                $songSection.parent().remove('.comments');
+                $('.comments').remove();
+                location.reload();
+                console.log('test');
             }
         });
     }

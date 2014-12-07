@@ -110,8 +110,6 @@ app.views = (function () {
         var $addComment = $('<section class="comments">').load('htmlElements/addComment.html',
 
             function () {
-                console.log('addComment.html loaded successfully');
-                console.log($addComment);
                 songSection.append($addComment);
             },
 
@@ -121,6 +119,10 @@ app.views = (function () {
         );
     }
 
+    // Showing the already entered comments
+    function showComment(songSection) {
+        //var $showComment = $()
+    }
 
     return {
         song: song,
