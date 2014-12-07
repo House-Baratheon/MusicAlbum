@@ -45,20 +45,31 @@ app.controller = (function () {
         }
     }
 
-    function addSongToPlayer(ev){
+    function addSongToPlayer(ev) {
         var $song = $(ev.target).parent();
         var song = {
-            title: $song.find('.songName').text().split(/[- ]+/)[1],
-            artist: $song.find('.songName').text().split(/[- ]+/)[0],
+            title: $.trim($song.find('.songName').text().split(/[-]+/)[1]),
+            artist: $.trim($song.find('.songName').text().split(/[-]+/)[0]),
             url: $song.find('.playButton').attr('data-link')
         };
 
-        var $playersList = $('.sm2-playlist-bd');
-        var $songLi = $('<li>');
-        var $songLink = $('<a href="'+song.url+'">').text(song.artist+" - "+song.title);
+        function addToPlayerUI(selector, withLink) {
+            var $domElement = $(selector);
+            var $songLi = $('<li>');
+            var $songLink = null;
+            if (withLink == true) {
+                $songLink = $('<a href="' + song.url + '">').addClass('selected').text(song.artist + ' - ' + song.title);
+                $songLi.append($songLink);
+            }else{
+                $songLi.html('<b>'+song.artist+'</b>' + ' - ' + song.title);
+            }
+            $($songLi).appendTo($domElement);
+            
 
-        $songLi.append($songLink);
-        $($songLi).appendTo($playersList);
+        }
+        <!-- add to list-->
+        addToPlayerUI('.sm2-playlist-wrapper .sm2-playlist-bd',true);
+
 
         //TODO  add song in player
     }
