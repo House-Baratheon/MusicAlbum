@@ -3,6 +3,7 @@ var app = app || {};
 app.views = (function () {
     var $songsContainer = $('#songs');
     var $formContainer = $('main');
+    var $playlistsContainer = $('#playlists');
 
     function song(song) {
         var $song = $('<article class="song">').load('htmlElements/song.html', function () {
@@ -106,6 +107,10 @@ app.views = (function () {
         return $formContainer;
     }
 
+    function getPlaylistsContainer() {
+        return $playlistsContainer;
+    }
+
     // Form for adding a comment
     function addComment (songSection) {
         var $addComment = $('<section class="comments">').load('htmlElements/addComment.html',
@@ -120,6 +125,14 @@ app.views = (function () {
         );
     }
 
+    function showPlaylists(playlists) {
+
+        $.get('htmlElements/playlists.html', function (template) {
+            var output = Mustache.render(template, {playlists : playlists});
+            $playlistsContainer.html(output);
+        });
+    }
+
     // Showing the already entered comments
     function showComment(songSection) {
         //var $showComment = $()
@@ -127,10 +140,12 @@ app.views = (function () {
 
     return {
         song: song,
+        playlists: showPlaylists,
         songEditForm: songEditForm,
         songUploadForm: songUploadForm,
         getSongsContainer: getSongsContainer,
         getFormContainer: getFormContainer,
+        getPlaylistsContainer : getPlaylistsContainer,
         addComment: addComment
     };
 })();

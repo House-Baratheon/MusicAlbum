@@ -7,14 +7,18 @@
     <link href="styles/songStyles.css" rel="stylesheet">
     <link href="styles/confirmationForm.css" rel="stylesheet">
     <link href="styles/songFormStyle.css" rel="stylesheet">
+
     <script src="libs/jquery-2.1.1.min.js"></script>
     <script src="libs/id3-minimized.js"></script>
+    <script src="libs/mustache.js"></script>
+
     <script src="scripts/requester.js" defer></script>
     <script src="scripts/data.js" defer></script>
     <script src="scripts/views.js" defer></script>
     <script src="scripts/controller.js" defer></script>
     <script src="scripts/confirmation-form.js" defer></script>
     <script src="scripts/main.js" defer></script>
+
     <link href="./styles/hesderStyle.css" rel="stylesheet" type="text/css"/>
     <script src="scripts/load.js" type="text/javascript"></script>
     <link href="styles/sectionStyle.css" rel="stylesheet" type="text/css"/>
@@ -33,10 +37,7 @@
 <section id="section">
     <main>
         <div id="songs"></div>
-        <div class="button" id="showAll">Show All Songs</div>
-        <br/>
-        <br/>
-        <br/>
+        <div id="playlists"></div>
     </main>
 </section>
 <br/>
@@ -128,8 +129,7 @@
 
             <div class="sm2-playlist-wrapper">
                 <ul class="sm2-playlist-bd">
-                    <li class="selected"><a
-                            href="#></a></li>
+                    <li class="selected"><a href="#"></a></li>
                 </ul>
             </div>
 

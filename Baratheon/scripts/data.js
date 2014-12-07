@@ -25,6 +25,7 @@ app.data = (function(){
         this.songs = new Table(parseComData, 'Songs');
         this.users = new Table(parseComUsers, '');
         this.files = new File(parseComFiles);
+        this.playlists = new Table(parseComData, 'Playlists');
     }
 
     var Table = (function(){

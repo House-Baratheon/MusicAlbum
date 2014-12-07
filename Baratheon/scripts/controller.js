@@ -45,6 +45,7 @@ app.controller = (function () {
         }
     }
 
+
     function addSongToPlayer(ev) {
         var $song = $(ev.target).parent();
         var song = {
@@ -70,6 +71,23 @@ app.controller = (function () {
     }
 
 
+    function loadPlaylists() {
+        var _this = this;
+        _this._views.getSongsContainer().hide();
+        _this._views.getPlaylistsContainer().html('');
+        _this._views.getPlaylistsContainer().show();
+        _this._data.playlists.readAllRows(function (playlists) {
+            playlists.forEach(function (playlist) {
+                playlist.number = playlist.songs.length;
+            });
+
+            _this._views.playlists(playlists);
+        }, function () {
+            console.log('Can not load playlists.')
+        });
+    }
+
+    
     function attachEvents() {
         var _this = this;
         _this._views.getSongsContainer().on('click', '.album', function (e) {
@@ -128,6 +146,8 @@ app.controller = (function () {
                 });
         });
 
+        _this._views.getSongsContainer().on('click', '.playButton', addSongToPlayer);
+
         $('body').on('click', '#upload-button', function (e) {
             _this._views.songUploadForm(function (file, song) {
                 _this._data.files.upload(file, function (data) {
@@ -175,7 +195,9 @@ app.controller = (function () {
             });
         });
 
-        _this._views.getSongsContainer().on('click', '.playButton', addSongToPlayer)
+        $('body').on('click', '#playlists-button', function (e) {
+            loadPlaylists.call(_this);
+        });
 
         // Comments section appear after clicking the comments button
         _this._views.getSongsContainer().on('click', '.commentsButton', function (event) {
