@@ -58,20 +58,15 @@ app.controller = (function () {
             var $songLi = $('<li>');
             var $songLink = null;
             if (withLink == true) {
-                $songLink = $('<a href="' + song.url + '">').addClass('selected').text(song.artist + ' - ' + song.title);
+                $songLink = $('<a href="' + song.url + '">').html('<b>' + song.artist + '</b>' + ' - ' + song.title);
                 $songLi.append($songLink);
-            }else{
-                $songLi.html('<b>'+song.artist+'</b>' + ' - ' + song.title);
+            } else {
+                $songLi.html('<b>' + song.artist + '</b>' + ' - ' + song.title);
             }
             $($songLi).appendTo($domElement);
-            
-
         }
         <!-- add to list-->
-        addToPlayerUI('.sm2-playlist-wrapper .sm2-playlist-bd',true);
-
-
-        //TODO  add song in player
+        addToPlayerUI('.sm2-playlist-wrapper .sm2-playlist-bd', true);
     }
 
 
