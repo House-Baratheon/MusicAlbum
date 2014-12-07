@@ -116,7 +116,8 @@ app.views = (function () {
         var $addComment = $('<section class="comments">').load('htmlElements/addComment.html',
 
             function () {
-                songSection.append($addComment);
+                //console.log('addComment.html loaded successfully');
+                songSection.commentForm = songSection.append($addComment);
             },
 
             function () {

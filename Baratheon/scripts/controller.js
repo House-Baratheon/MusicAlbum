@@ -87,7 +87,7 @@ app.controller = (function () {
         });
     }
 
-    
+
     function attachEvents() {
         var _this = this;
         _this._views.getSongsContainer().on('click', '.album', function (e) {
@@ -203,15 +203,14 @@ app.controller = (function () {
         _this._views.getSongsContainer().on('click', '.commentsButton', function (event) {
             var isClicked = $(event.target).attr('clicked');
 
-            console.log(isClicked);
+            var $songSection = $(event.target).parent().parent().parent();
 
-            if (!isClicked) {
-                var $songSection = $(event.target).parent().parent().parent();
+            if (isClicked==="false"||isClicked===undefined) {
                 _this._views.addComment($songSection);
                 $(event.target).attr('clicked', 'true');
             } else {
                 $(event.target).attr('clicked', 'false');
-                $songSection.parent().remove('.comments');
+                $songSection.find('.comments').remove()
             }
         });
 
