@@ -18,6 +18,7 @@ app.views = (function () {
             $song.find('.upload-button-link').attr('href', 'data:application/octet-stream,' + song.file.url);
             $song.find('.upload-button-link').attr('download', song.name + '.mp3');
             $song.find('.comments').attr('data-id', song.objectId);
+            $song.find('.playButton').attr('data-link', song.file.url);
             $songsContainer.append($song);
         });
     }

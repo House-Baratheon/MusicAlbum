@@ -93,3 +93,7 @@ button a {
     text-decoration: none;
     color: black;
 }
+
+.song .playButton {
+    cursor: pointer;
+}

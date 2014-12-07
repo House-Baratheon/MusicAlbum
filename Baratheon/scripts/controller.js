@@ -45,6 +45,17 @@ app.controller = (function () {
         }
     }
 
+    function addSongToPlayer(ev){
+        var $song = $(ev.target).parent();
+        var song = {
+            title: $song.find('.songName').text(),
+            artist: $song.find('.artist').text(),
+            url: $song.find('.playButton').attr('data-link')
+        }
+
+        console.log(song);
+    }
+
 
     function attachEvents() {
         var _this = this;
@@ -151,26 +162,28 @@ app.controller = (function () {
             });
         });
 
+        _this._views.getSongsContainer().on('click', '.playButton', addSongToPlayer)
+
+        // Comments section appear after clicking the comments button
+        _this._views.getSongsContainer().on('click', '.commentsButton', function (event) {
+            var isClicked = $(event.target).attr('clicked');
+
+            console.log(isClicked);
+
+            if (!isClicked) {
+                var $songSection = $(event.target).parent().parent().parent();
+                _this._views.addComment($songSection);
+                $(event.target).attr('clicked', 'true');
+            } else {
+                $(event.target).attr('clicked', 'false');
+                $songSection.parent().remove('.comments');
+            }
+        });
+
 
         $('#showAll').on('click', function (e) {
             var genre = $(e.target).text();
             loadSongs.call(_this);
-        });
-
-        // Comments section appear after clicking the comments button
-        _this._views.getSongsContainer().on('click', '.commentsButton', function test(event) {
-            var isClicked = $(event.target).attr('clicked');
-
-            if(!isClicked) {
-                var $songSection = $(event.target).parent().parent().parent();
-                _this._views.addComment($songSection);
-                isClicked = $(event.target).attr('clicked', 'false');
-            }else  {
-                $(event.target).attr('clicked', 'true');
-                $('.comments').remove();
-                location.reload();
-                console.log('test');
-            }
         });
     }
 
