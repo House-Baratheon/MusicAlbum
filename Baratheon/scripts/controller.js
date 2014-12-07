@@ -53,6 +53,13 @@ app.controller = (function () {
             url: $song.find('.playButton').attr('data-link')
         };
 
+        var $playersList = $('.sm2-playlist-bd');
+        var $songLi = $('<li>');
+        var $songLink = $('<a href="'+song.url+'">').text(song.artist+" - "+song.title);
+
+        $songLi.append($songLink);
+        $($songLi).appendTo($playersList);
+
         //TODO  add song in player
     }
 
