@@ -48,12 +48,12 @@ app.controller = (function () {
     function addSongToPlayer(ev){
         var $song = $(ev.target).parent();
         var song = {
-            title: $song.find('.songName').text(),
-            artist: $song.find('.artist').text(),
+            title: $song.find('.songName').text().split(/[- ]+/)[1],
+            artist: $song.find('.songName').text().split(/[- ]+/)[0],
             url: $song.find('.playButton').attr('data-link')
-        }
+        };
 
-        console.log(song);
+        //TODO  add song in player
     }
 
 
