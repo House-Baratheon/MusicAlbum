@@ -1,7 +1,7 @@
 /*jslint plusplus: true, white: true, nomen: true */
 /* global soundManager, document, console, window */
 
-(function (window) {
+(function(window) {
 
     /**
      * SoundManager 2: "Bar UI" player
@@ -13,7 +13,7 @@
     var Player,
         players = [],
     // CSS selector that will get us the top-level DOM node for the player UI.
-        playerSelector = '.sm2-bar-ui fixed full-width',
+        playerSelector = '.sm2-bar-ui',
         utils;
 
     soundManager.setup({
@@ -22,7 +22,7 @@
         flashVersion: 9
     });
 
-    soundManager.onready(function () {
+    soundManager.onready(function() {
 
         var nodes,
             i, j;
@@ -30,7 +30,7 @@
         nodes = utils.dom.getAll(playerSelector);
 
         if (nodes && nodes.length) {
-            for (i = 0, j = nodes.length; i < j; i++) {
+            for (i=0, j=nodes.length; i<j; i++) {
                 players.push(new Player(nodes[i]));
             }
         }
@@ -39,13 +39,13 @@
 
     utils = {
 
-        array: (function () {
+        array: (function() {
 
             function compare(property) {
 
                 var result;
 
-                return function (a, b) {
+                return function(a, b) {
 
                     if (a[property] < b[property]) {
                         result = -1;
@@ -66,7 +66,7 @@
                 var i, j, temp;
 
                 for (i = array.length - 1; i > 0; i--) {
-                    j = Math.floor(Math.random() * (i + 1));
+                    j = Math.floor(Math.random() * (i+1));
                     temp = array[i];
                     array[i] = array[j];
                     array[j] = temp;
@@ -83,7 +83,7 @@
 
         }()),
 
-        css: (function () {
+        css: (function() {
 
             function hasClass(o, cStr) {
 
@@ -148,7 +148,7 @@
 
         }()),
 
-        dom: (function () {
+        dom: (function() {
 
             function getAll(/* parentNode, selector */) {
 
@@ -187,7 +187,7 @@
 
                 // hackish: if more than one match and no third argument, return the last.
                 if (results && results.length) {
-                    results = results[results.length - 1];
+                    results = results[results.length-1];
                 }
 
                 return results;
@@ -201,7 +201,7 @@
 
         }()),
 
-        position: (function () {
+        position: (function() {
 
             function getOffX(o) {
 
@@ -260,7 +260,7 @@
 
         }()),
 
-        style: (function () {
+        style: (function() {
 
             function get(node, styleProp) {
 
@@ -287,14 +287,14 @@
 
         }()),
 
-        events: (function () {
+        events: (function() {
 
             var add, remove, preventDefault;
 
-            add = function (o, evtName, evtHandler) {
+            add = function(o, evtName, evtHandler) {
                 // return an object with a convenient detach method.
                 var eventObject = {
-                    detach: function () {
+                    detach: function() {
                         return remove(o, evtName, evtHandler);
                     }
                 };
@@ -306,13 +306,13 @@
                 return eventObject;
             };
 
-            remove = (window.removeEventListener !== undefined ? function (o, evtName, evtHandler) {
+            remove = (window.removeEventListener !== undefined ? function(o, evtName, evtHandler) {
                 return o.removeEventListener(evtName, evtHandler, false);
-            } : function (o, evtName, evtHandler) {
+            } : function(o, evtName, evtHandler) {
                 return o.detachEvent('on' + evtName, evtHandler);
             });
 
-            preventDefault = function (e) {
+            preventDefault = function(e) {
                 if (e.preventDefault) {
                     e.preventDefault();
                 } else {
@@ -330,7 +330,7 @@
 
         }()),
 
-        features: (function () {
+        features: (function() {
 
             var getAnimationFrame,
                 localAnimationFrame,
@@ -356,7 +356,7 @@
                 || null);
 
             // apply to window, avoid "illegal invocation" errors in Chrome
-            getAnimationFrame = localAnimationFrame ? function () {
+            getAnimationFrame = localAnimationFrame ? function() {
                 return localAnimationFrame.apply(window, arguments);
             } : null;
 
@@ -402,7 +402,7 @@
 
                 try {
                     testDiv.style[transform] = style;
-                } catch (e) {
+                } catch(e) {
                     // that *definitely* didn't work.
                     return false;
                 }
@@ -443,7 +443,7 @@
      * player bits
      */
 
-    Player = function (playerNode) {
+    Player = function(playerNode) {
 
         var css, dom, extras, playlistController, soundObject, actions, actionData, defaultItem;
 
@@ -542,7 +542,7 @@
 
                 if (list) {
 
-                    for (i = 0, j = list.length; i < j; i++) {
+                    for (i=0, j=list.length; i<j; i++) {
                         if (list[i] === item) {
                             offset = i;
                             break;
@@ -619,7 +619,7 @@
 
                 items = utils.dom.getAll(dom.playlist, '.' + css.selected);
 
-                for (i = 0, j = items.length; i < j; i++) {
+                for (i=0, j=items.length; i<j; i++) {
                     utils.css.remove(items[i], css.selected);
                 }
 
@@ -745,10 +745,10 @@
 
             // convert milliseconds to hh:mm:ss, return as object literal or string
 
-            var nSec = Math.floor(msec / 1000),
-                hh = Math.floor(nSec / 3600),
-                min = Math.floor(nSec / 60) - Math.floor(hh * 60),
-                sec = Math.floor(nSec - (hh * 3600) - (min * 60));
+            var nSec = Math.floor(msec/1000),
+                hh = Math.floor(nSec/3600),
+                min = Math.floor(nSec/60) - Math.floor(hh * 60),
+                sec = Math.floor(nSec -(hh*3600) -(min*60));
 
             // if (min === 0 && sec === 0) return null; // return 0:00 as null
 
@@ -783,7 +783,7 @@
 
                 url: url,
 
-                whileplaying: function () {
+                whileplaying: function() {
                     var progressMaxLeft = 100,
                         left,
                         width;
@@ -803,7 +803,7 @@
 
                 },
 
-                onbufferchange: function (isBuffering) {
+                onbufferchange: function(isBuffering) {
                     if (isBuffering) {
                         utils.css.add(dom.o, 'buffering');
                     } else {
@@ -811,19 +811,19 @@
                     }
                 },
 
-                onplay: function () {
+                onplay: function() {
                     utils.css.swap(dom.o, 'paused', 'playing');
                 },
 
-                onpause: function () {
+                onpause: function() {
                     utils.css.swap(dom.o, 'playing', 'paused');
                 },
 
-                onresume: function () {
+                onresume: function() {
                     utils.css.swap(dom.o, 'paused', 'playing');
                 },
 
-                whileloading: function () {
+                whileloading: function() {
 
                     if (!this.isHTML5) {
                         dom.duration.innerHTML = getTime(this.durationEstimate, true);
@@ -831,7 +831,7 @@
 
                 },
 
-                onload: function (ok) {
+                onload: function(ok) {
 
                     if (ok) {
 
@@ -845,7 +845,7 @@
 
                 },
 
-                onerror: function () {
+                onerror: function() {
 
                     // sound failed to load.
                     var item, element, html;
@@ -858,7 +858,7 @@
                         // playlistTarget.innerHTML = '<ul class="sm2-playlist-bd"><li>' + item.innerHTML + '</li></ul>';
 
                         if (extras.loadFailedCharacter) {
-                            dom.playlistTarget.innerHTML = dom.playlistTarget.innerHTML.replace('<li>', '<li>' + extras.loadFailedCharacter + ' ');
+                            dom.playlistTarget.innerHTML = dom.playlistTarget.innerHTML.replace('<li>' ,'<li>' + extras.loadFailedCharacter + ' ');
                             if (playlistController.data.playlist && playlistController.data.playlist[playlistController.data.selectedIndex]) {
                                 element = playlistController.data.playlist[playlistController.data.selectedIndex].getElementsByTagName('a')[0];
                                 html = element.innerHTML;
@@ -884,13 +884,13 @@
 
                 },
 
-                onstop: function () {
+                onstop: function() {
 
                     utils.css.remove(dom.o, 'playing');
 
                 },
 
-                onfinish: function () {
+                onfinish: function() {
 
                     var lastIndex, item;
 
@@ -915,8 +915,7 @@
                             url: playlistController.getURL()
                         });
 
-                    }
-                    /* else {
+                    }/* else {
 
                      // explicitly stop?
                      // this.stop();
@@ -1077,7 +1076,7 @@
                         offset = target.href.lastIndexOf('#');
 
                         if (offset !== -1) {
-                            methodName = target.href.substr(offset + 1);
+                            methodName = target.href.substr(offset+1);
                             if (methodName && actions[methodName]) {
                                 handled = true;
                                 actions[methodName](e);
@@ -1191,7 +1190,7 @@
 
             utils.events.add(dom.o, 'click', handleClick);
 
-            utils.events.add(dom.progressTrack, 'mousedown', function (e) {
+            utils.events.add(dom.progressTrack, 'mousedown', function(e) {
 
                 if (isRightClick(e)) {
                     return true;
@@ -1223,7 +1222,7 @@
 
         actions = {
 
-            play: function (e) {
+            play: function(e) {
 
                 var target,
                     href;
@@ -1245,7 +1244,7 @@
 
             },
 
-            next: function (/* e */) {
+            next: function(/* e */) {
 
                 var item, lastIndex;
 
@@ -1266,7 +1265,7 @@
 
             },
 
-            prev: function (/* e */) {
+            prev: function(/* e */) {
 
                 var item, lastIndex;
 
@@ -1281,7 +1280,7 @@
 
             },
 
-            shuffle: function (e) {
+            shuffle: function(e) {
                 var target = e.target || e.srcElement;
                 if (!utils.css.has(target.parentNode, css.disabled)) {
                     // toggle
@@ -1290,7 +1289,7 @@
                 }
             },
 
-            repeat: function (e) {
+            repeat: function(e) {
                 var target = e.target || e.srcElement;
                 if (!utils.css.has(target, css.disabled)) {
                     utils.css.toggle(target.parentNode, css.active);
@@ -1298,7 +1297,7 @@
                 }
             },
 
-            menu: function (/* e */) {
+            menu: function(/* e */) {
 
                 var isOpen;
 
@@ -1309,7 +1308,7 @@
 
             },
 
-            adjustVolume: function (e) {
+            adjustVolume: function(e) {
 
                 var backgroundSize,
                     backgroundMargin,
@@ -1334,12 +1333,12 @@
                 // relative position of mouse over element
                 value = Math.max(0, Math.min(1, (e.clientX - actionData.volume.x) / actionData.volume.width));
 
-                target.style.clip = 'rect(0px, ' + (actionData.volume.width * value) + 'px, ' + actionData.volume.height + 'px, ' + (actionData.volume.width * (backgroundMargin / 100)) + 'px)';
+                target.style.clip = 'rect(0px, ' + (actionData.volume.width * value) + 'px, ' + actionData.volume.height + 'px, ' + (actionData.volume.width * (backgroundMargin/100)) + 'px)';
 
                 // determine logical volume, including background margin
-                pixelMargin = ((backgroundMargin / 100) * actionData.volume.width);
+                pixelMargin = ((backgroundMargin/100) * actionData.volume.width);
 
-                volume = Math.max(0, Math.min(1, ((e.clientX - actionData.volume.x) - pixelMargin) / (actionData.volume.width - (pixelMargin * 2))));
+                volume = Math.max(0, Math.min(1, ((e.clientX - actionData.volume.x) - pixelMargin) / (actionData.volume.width - (pixelMargin*2))));
 
                 // set volume
                 if (soundObject) {
@@ -1350,7 +1349,7 @@
 
             },
 
-            releaseVolume: function (/* e */) {
+            releaseVolume: function(/* e */) {
 
                 utils.events.remove(document, 'mousemove', actions.adjustVolume);
                 utils.events.remove(document, 'mouseup', actions.releaseVolume);
