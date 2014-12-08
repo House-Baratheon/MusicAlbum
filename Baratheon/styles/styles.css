@@ -32,3 +32,310 @@ main {
     background-color: #000000;
     color: #FFFFFF;
 }
+
+/* confirmationForm */
+
+#confirmationForm {
+    font-size: 16px;
+    margin: 25px auto;
+    width: 400px;
+    background: #c0c0c0;
+    box-shadow: 5px 5px #000000;
+    padding: 10px;
+    text-align: center;
+}
+
+#confirmationForm button {
+    margin: 10px;
+}
+
+.comments {
+    position: absolute;
+    right: 0;
+    margin: 0px;
+}
+
+.text-comments{
+    width:100px;
+    height:30px;
+    resize: none;
+}
+
+
+
+
+/*   content   */
+body{
+    background-color: #6BCCF2;
+}
+
+#footer{
+    max-width: 120em;
+    margin: 10px;
+    padding: 10px;
+    margin:  0 auto;
+    background-color: #F25835;
+}
+
+/*  headerStyle  */
+
+.logo{
+    width: 153px;
+    height: 121px;
+    margin: 10px;
+    padding-bottom: 32px;
+    margin-left: 7em;
+    margin-top: -13em;
+}
+.imgLogo{
+    max-width: 100%;
+    border-radius: 20px;
+}
+#header{
+    max-width: 120em;
+    margin: 10px;
+    padding: 10px;
+    margin:  0 auto;
+    background-color: #F25835;
+}
+.navMenu{
+    margin-top: 7em;
+    margin-left: 45em;
+}
+.navMenu ul li{
+    display: inline-block;
+    text-decoration: none;
+// padding: 10px;
+//  padding-left: 20px;
+    font-size: 20px;
+// background-color: #FEFF33;
+    border-radius: 2px;
+    transition: all .2s linear;
+    padding-left: 26px;
+}
+.buttonImg{
+    width: 100px;
+    height: 100px;
+}
+.navMenu ul li a{
+    text-decoration: none;
+    color: #F25835;
+}
+.navMenu ul li a:hover{
+    cursor: pointer;
+}
+.navMenu ul li:hover{
+//  background-color: #EFEFEF;
+    cursor: pointer;
+}
+.menuText{
+    font-size: 26px;
+    margin-left: 14px;
+    margin-top: -73px;
+    z-index: 200;
+}
+
+.navMenu ul li{
+    -webkit-transition-property: -webkit-transform;
+    -webkit-transition-duration: 1s;
+
+    -moz-transition-property: -moz-transform;
+    -moz-transition-duration: 1s;
+}
+.navMenu ul li:hover {
+    -webkit-animation-name: rotate;
+    -webkit-animation-duration: 0.7s;
+    -webkit-animation-iteration-count: infinite;
+    -webkit-animation-timing-function: linear;
+
+    -moz-animation-name: rotate;
+    -moz-animation-duration: 0.7s;
+    -moz-animation-iteration-count: infinite;
+    -moz-animation-timing-function: linear;
+}
+@-webkit-keyframes rotate {
+    from {-webkit-transform: rotate(0deg);}
+    to {-webkit-transform: rotate(360deg);}
+}
+
+@-moz-keyframes rotate {
+    from {-moz-transform: rotate(0deg);}
+    to {-moz-transform: rotate(360deg);}
+}
+
+/*    sectionStyle     and      songFormStyle      */
+
+#section{
+    max-width: 120em;
+    margin: 10px;
+    padding: 10px;
+    margin:  0 auto;
+    background-color:#F25835;
+}
+
+.songForm {
+    font-size: 16px;
+    margin: 25px auto;
+    width: 400px;
+    background-color: #6BCCF2;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.songForm input {
+    display: block;
+    padding: 3px;
+    width: 350px;
+    height: 30px;
+    margin: 10px auto;
+    border-radius: 5px;
+}
+
+.songForm  h1, .songForm div {
+    text-align: center;
+}
+.editSongButton{
+    padding: 5px;
+    padding-bottom: 13px;
+    margin-left: 30px;
+    height: 10px;
+    background-color: white;
+    font-size: 15px;
+    width: 60px;
+    border-radius: 5px;
+    display: inline-block;
+    cursor: pointer;
+}
+.editSongButton:hover{
+    background-color: #6BCCF2;
+}
+
+
+/*    songStyles      */
+
+html {
+    font-size: 10px;
+}
+
+.song {
+    width: 80rem;
+    margin-top: 20px;
+    font-size: 16px;
+
+}
+
+.song>section {
+    border-bottom: solid 1px gray;
+}
+
+.song .addToPlayerList, .song .songIcon {
+    border: solid 1px #000;
+}
+
+.song > section, .addToPlayerList, .song .songHeader > div,
+.songIcon, .songFooter section {
+    display: inline-block;
+    vertical-align: top;
+}
+
+.song .duration {
+    float: right;
+    margin: 5px;
+}
+
+.song > section {
+    width: 60rem;
+    margin-left: 1rem;
+}
+
+.songName {
+    font-size: 18px;
+    margin: 5px 0;
+}
+
+.song .songInfo, .song .uploaderName {
+    font-size: 12px;
+}
+
+.songIcon {
+    width: 100px;
+    background-color: #fff;
+}
+
+.song > section, .song .songIcon {
+    height: 100px;
+}
+
+.addToPlayerList {
+    width: 70px;
+    height: 55px;
+    text-align: center;
+    line-height: 27px;
+    margin-bottom: 12px;
+    margin-right: 10px;
+    background-color: #FEFF33;
+    border-radius: 20px;
+    font-size: 13.5px;
+}
+
+.song .songFooter {
+    display:block;
+    vertical-align: bottom;
+}
+
+.song .songFooter section:nth-child(2) {
+    float: right;
+}
+
+.song .controls {
+    font-size: 8px;
+}
+
+.song .statistics img {
+    width: 15px;
+    height: 15px;
+}
+
+.song .uploaderName, .song .album,
+.song .genre {
+    cursor: pointer;
+    color: darkslategrey;
+}
+
+.song .uploaderName:hover, .song .album:hover,
+.song .genre:hover {
+    text-decoration: underline;
+}
+
+button a {
+    text-decoration: none;
+    color: black;
+}
+
+.song .addToPlayerList {
+    cursor: pointer;
+}
+
+#playlists .songName {
+    cursor: pointer;
+}
+
+/*           bPopupStyle       */
+
+#element_to_pop_up {
+    background-color:#fff;
+    color:#000;
+    display:none;
+    padding:20px;
+    min-width:700px;
+    min-height: 300px;
+    font-size: 20px;
+}
+.b-close{
+    cursor:pointer;
+    position:absolute;
+    right:10px;
+    top:5px;
+}
+
+
