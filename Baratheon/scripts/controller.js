@@ -281,7 +281,7 @@ app.controller = (function () {
         _this._views.getSongsContainer().on('click', '.commentsButton', function (event) {
             var isClicked = $(event.target).attr('clicked');
 
-            var $songSection = $(event.target).parent().parent().parent();
+            var $songSection = $(event.target).parent();
 
             if (isClicked === "false" || isClicked === undefined) {
                 _this._views.addComment($songSection);
@@ -291,6 +291,20 @@ app.controller = (function () {
                 $songSection.find('.comments').remove()
             }
         });
+
+        _this._views.getPlaylistsContainer().on('click', '.commentsButton', function (event) {
+            var isClicked = $(event.target).attr('clicked');
+
+            var $playlistSection = $(event.target).parent();
+
+            if (isClicked === "false" || isClicked === undefined) {
+                _this._views.addComment($playlistSection);
+                $(event.target).attr('clicked', 'true');
+            } else {
+                $(event.target).attr('clicked', 'false');
+                $playlistSection.find('.comments').remove()
+            }
+        })
     }
 
     return {
