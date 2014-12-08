@@ -1,3 +1,4 @@
+
 button {
     cursor: pointer;
 }
@@ -48,21 +49,27 @@ main {
 #confirmationForm button {
     margin: 10px;
 }
+/*   comments    */
 
 .comments {
     position: absolute;
-    right: 0;
+    right: 5px;
+    top: 0px;
     margin: 0px;
 }
 
-.text-comments{
-    width:100px;
-    height:30px;
+textarea{
+    width:455px;
+    height: auto;
     resize: none;
+    display: block;
 }
 
-
-
+#author{
+    display: block;
+    margin-top: 0px;
+    margin-bottom:10px;
+}
 
 /*   content   */
 body{
@@ -87,10 +94,18 @@ body{
     margin-left: 7em;
     margin-top: -13em;
 }
+
 .imgLogo{
+    content: url('../images/new_baratheon_logo.png');
+    background-repeat: no-repeat;
+    width: auto;
+    height: auto;
+    margin: 0;
+    padding: 0;
     max-width: 100%;
-    border-radius: 20px;
+    border-radius: 80px;
 }
+
 #header{
     max-width: 120em;
     margin: 10px;
@@ -98,36 +113,33 @@ body{
     margin:  0 auto;
     background-color: #F25835;
 }
+
 .navMenu{
     margin-top: 7em;
     margin-left: 45em;
 }
+
 .navMenu ul li{
     display: inline-block;
     text-decoration: none;
-// padding: 10px;
-//  padding-left: 20px;
+    padding: 10px;
+    padding-left: 20px;
     font-size: 20px;
-// background-color: #FEFF33;
     border-radius: 2px;
     transition: all .2s linear;
     padding-left: 26px;
 }
+
 .buttonImg{
     width: 100px;
     height: 100px;
+    content: url('../images/button.png');
 }
 .navMenu ul li a{
     text-decoration: none;
     color: #F25835;
 }
-.navMenu ul li a:hover{
-    cursor: pointer;
-}
-.navMenu ul li:hover{
-//  background-color: #EFEFEF;
-    cursor: pointer;
-}
+
 .menuText{
     font-size: 26px;
     margin-left: 14px;
@@ -153,6 +165,7 @@ body{
     -moz-animation-iteration-count: infinite;
     -moz-animation-timing-function: linear;
 }
+
 @-webkit-keyframes rotate {
     from {-webkit-transform: rotate(0deg);}
     to {-webkit-transform: rotate(360deg);}
@@ -196,7 +209,7 @@ body{
 }
 .editSongButton{
     padding: 5px;
-    padding-bottom: 13px;
+    padding-bottom: 23px;
     margin-left: 30px;
     height: 10px;
     background-color: white;
@@ -273,7 +286,7 @@ html {
     line-height: 27px;
     margin-bottom: 12px;
     margin-right: 10px;
-    background-color: #FEFF33;
+    background-color: #D1A413;
     border-radius: 20px;
     font-size: 13.5px;
 }
