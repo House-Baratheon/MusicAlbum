@@ -54,18 +54,9 @@ app.controller = (function () {
             url: $song.find('.addToPlayerList').attr('data-link')
         };
         <!-- add to list-->
-        addToPlayerUI2('.sm2-playlist-wrapper .sm2-playlist-bd');
+        addToPlayerUI('.sm2-playlist-wrapper .sm2-playlist-bd');
 
         function addToPlayerUI(selector) {
-            var $domElement = $(selector);
-            var $songLi = $('<li>');
-            var $songLink = null;
-            $songLink = $('<a href="' + song.url + '">').html('<b>' + song.artist + '</b>' + ' - ' + song.title);
-            $songLi.append($songLink);
-            $($songLi).appendTo($domElement);
-        }
-
-        function addToPlayerUI2(selector) {
             var $domElement = $(selector);
             var $wrapper = $('<div>').attr('id','wrapper');
             var $songLi = $('<li>');
