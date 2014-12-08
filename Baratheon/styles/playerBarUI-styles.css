@@ -762,8 +762,18 @@
 .sm2-playlist-wrapper ul li:nth-child(odd) {
     background-color: rgba(255,255,255,0.03);
 }
+#removeSong {
+    float: right;
+    margin-top: -27px;
+    display: inline-block;
+    padding: 6px;
+}
+#removeSong:hover{
+    background-color: red;
+}
 
 .sm2-playlist-wrapper ul li a {
+
     display: block;
     padding: 0.5em 0.25em 0.5em 0.75em;
     margin-right: 0.5em;

@@ -54,7 +54,7 @@ app.controller = (function () {
             url: $song.find('.addToPlayerList').attr('data-link')
         };
         <!-- add to list-->
-        addToPlayerUI('.sm2-playlist-wrapper .sm2-playlist-bd');
+        addToPlayerUI2('.sm2-playlist-wrapper .sm2-playlist-bd');
 
         function addToPlayerUI(selector) {
             var $domElement = $(selector);
@@ -64,18 +64,31 @@ app.controller = (function () {
             $songLi.append($songLink);
             $($songLi).appendTo($domElement);
         }
+
+        function addToPlayerUI2(selector) {
+            var $domElement = $(selector);
+            var $wrapper = $('<div>').attr('id','wrapper');
+            var $songLi = $('<li>');
+            var $songLink = $('<a href="' + song.url + '">')
+                .html('<b>' + song.artist + '</b>' + ' - ' + song.title)
+                .attr('title','play');
+
+            var $btnSongRemove = $('<div>')
+                .append($('<a href="#">x</a>')
+                    .attr({'id':'removeSong', 'title':'remove'})
+                    .on('click', function (ev) {
+                        $(ev.target).parent()
+                                .parent().remove();
+                }));
+
+            $songLi.append($songLink);
+            $songLi.append($btnSongRemove);
+            $wrapper.append($songLi);
+            $($wrapper).appendTo($domElement);
+        }
+
     }
-    function addToPlayerUI2(selector) {
-        var $domElement = $(selector);
-        var $wrapper = $('<div>');
-        var $songLi = $('<div>').append($('<li>'));
-        var $songLink = $('<a href="' + song.url + '">').html('<b>' + song.artist + '</b>' + ' - ' + song.title);;
-        var $btnSongRemove = $('<div>').append($('<a href="#">x</a>'));
-        $songLi.append($songLink);
-        $songLi.append($btnSongRemove);
-        $wrapper.append($songLi);
-        $($wrapper).appendTo($domElement);
-    }
+
 
     function loadPlaylists() {
         var _this = this;
@@ -89,7 +102,7 @@ app.controller = (function () {
 
             _this._views.playlists(playlists);
         }, function () {
-            console.log('Can not load playlists.')
+            console.log('Cannot load play lists.')
         });
 
         _this._views.getPlaylistsContainer().on('click', 'h1', function (e) {
