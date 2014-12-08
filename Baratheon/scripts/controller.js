@@ -51,25 +51,31 @@ app.controller = (function () {
         var song = {
             title: $.trim($song.find('.songName').text().split(/[-]+/)[1]),
             artist: $.trim($song.find('.songName').text().split(/[-]+/)[0]),
-            url: $song.find('.playButton').attr('data-link')
+            url: $song.find('.addToPlayerList').attr('data-link')
         };
+        <!-- add to list-->
+        addToPlayerUI('.sm2-playlist-wrapper .sm2-playlist-bd');
 
-        function addToPlayerUI(selector, withLink) {
+        function addToPlayerUI(selector) {
             var $domElement = $(selector);
             var $songLi = $('<li>');
             var $songLink = null;
-            if (withLink == true) {
-                $songLink = $('<a href="' + song.url + '">').html('<b>' + song.artist + '</b>' + ' - ' + song.title);
-                $songLi.append($songLink);
-            } else {
-                $songLi.html('<b>' + song.artist + '</b>' + ' - ' + song.title);
-            }
+            $songLink = $('<a href="' + song.url + '">').html('<b>' + song.artist + '</b>' + ' - ' + song.title);
+            $songLi.append($songLink);
             $($songLi).appendTo($domElement);
         }
-        <!-- add to list-->
-        addToPlayerUI('.sm2-playlist-wrapper .sm2-playlist-bd', true);
     }
-
+    function addToPlayerUI2(selector) {
+        var $domElement = $(selector);
+        var $wrapper = $('<div>');
+        var $songLi = $('<div>').append($('<li>'));
+        var $songLink = $('<a href="' + song.url + '">').html('<b>' + song.artist + '</b>' + ' - ' + song.title);;
+        var $btnSongRemove = $('<div>').append($('<a href="#">x</a>'));
+        $songLi.append($songLink);
+        $songLi.append($btnSongRemove);
+        $wrapper.append($songLi);
+        $($wrapper).appendTo($domElement);
+    }
 
     function loadPlaylists() {
         var _this = this;
@@ -90,7 +96,7 @@ app.controller = (function () {
             loadSongsOfPlaylist.call(_this, e)
         })
     }
-    
+
 
     function loadSongsOfPlaylist(e){
         var _this = this;
@@ -166,7 +172,7 @@ app.controller = (function () {
                 });
         });
 
-        _this._views.getSongsContainer().on('click', '.playButton', addSongToPlayer);
+        _this._views.getSongsContainer().on('click', '.addToPlayerList', addSongToPlayer);
 
         $('body').on('click', '#upload-button', function (e) {
             _this._views.songUploadForm(function (file, song) {

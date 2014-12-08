@@ -13,11 +13,11 @@ html {
     border-bottom: solid 1px gray;
 }
 
-.song .playButton, .song .songIcon {
+.song .addToPlayerList, .song .songIcon {
     border: solid 1px #000;
 }
 
-.song > section, .playButton, .song .songHeader > div,
+.song > section, .addToPlayerList, .song .songHeader > div,
 .songIcon, .songFooter section {
     display: inline-block;
     vertical-align: top;
@@ -51,17 +51,20 @@ html {
     height: 100px;
 }
 
-.playButton {
-    width: 60px;
-    height: 60px;
+.addToPlayerList {
+    width: 70px;
+    height: 55px;
     text-align: center;
-    line-height: 60px;
+    line-height: 27px;
     margin-bottom: 12px;
     margin-right: 10px;
+    background-color: #FEFF33;
+    border-radius: 20px;
+    font-size: 13.5px;
 }
 
-.song .songFooter, {
-    display: inline-block;
+.song .songFooter {
+    display:block;
     vertical-align: bottom;
 }
 
@@ -94,7 +97,7 @@ button a {
     color: black;
 }
 
-.song .playButton {
+.song .addToPlayerList {
     cursor: pointer;
 }
 
