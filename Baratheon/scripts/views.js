@@ -59,6 +59,21 @@ app.views = (function () {
         $songForm.show();
     }
 
+    function showPlaylistForm(saveFunction) {
+        var $songForm = $('<div class="forms">').load('htmlElements/addPlaylistForm.html', function () {
+            $songForm.hide();
+            $formContainer.append($songForm);
+
+            $songForm.on('click', '#cancelButton', function () {
+                $songForm.remove();
+            });
+
+            $songForm.on('click', '#saveButton', saveFunction);
+
+            $songForm.show();
+        });
+    }
+
     function songUploadForm(yesFunction, noFunction) {
         var $songForm = $('<div class="forms">').load('htmlElements/songUploadForm.html', function () {
             var file,
@@ -132,7 +147,6 @@ app.views = (function () {
     }
 
     function showPlaylists(playlists) {
-
         $.get('htmlElements/playlists.html', function (template) {
             var output = Mustache.render(template, {playlists : playlists});
             $playlistsContainer.html(output);
@@ -150,6 +164,7 @@ app.views = (function () {
         songEditForm: songEditForm,
         songUploadForm: songUploadForm,
         getSongsContainer: getSongsContainer,
+        showPlaylistForm: showPlaylistForm,
         getFormContainer: getFormContainer,
         getPlaylistsContainer : getPlaylistsContainer,
         getCurrentPlaylistsContainer: getCurrentPlaylistsContainer,

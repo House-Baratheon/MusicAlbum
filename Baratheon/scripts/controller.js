@@ -77,7 +77,6 @@ app.controller = (function () {
             $wrapper.append($songLi);
             $($wrapper).appendTo($domElement);
         }
-
     }
 
 
@@ -95,14 +94,10 @@ app.controller = (function () {
         }, function () {
             console.log('Cannot load play lists.')
         });
-
-        _this._views.getPlaylistsContainer().on('click', 'h1', function (e) {
-            loadSongsOfPlaylist.call(_this, e)
-        })
     }
 
 
-    function loadSongsOfPlaylist(e){
+    function loadSongsOfPlaylist(e) {
         var _this = this;
         var playlistTitle = $(e.target).text();
         var songs = $(e.target).attr('data-songs').split(',');
@@ -110,16 +105,37 @@ app.controller = (function () {
         _this._views.getCurrentPlaylistsContainer().html('');
         _this._views.getCurrentPlaylistsContainer().show();
         songs.forEach(function (song) {
-            var songHtml = $('article #' + song).parent().parent().parent().html();
+            if($('article #' + song).length){
+                var songHtml = $('article #' + song).parent().parent().parent().html();
+                var $song = $('<article class="song">').html(songHtml);
+                _this._views.getCurrentPlaylistsContainer().append($song);
+            } else {
+                var index = songs.indexOf(song);
+                var playlistId = $(e.target).parent().parent().parent().find('.controls').attr('id');
+                songs.splice(index, 1);
+                _this._data.playlists.editRow(playlistId, {songs: songs}, function (data) {
+                 }, function (error) {
+                    console.log(error);
+                });
+            }
+        });
+    }
+
+
+    function addSongToPlaylist(songId, playlistId, playlistSongs){
+        _this = this;
+        _this._data.playlists.editRow(playlistId, {songs: playlistSongs}, function (data) {
+            var songHtml = $('article #' + songId).parent().parent().parent().html();
             var $song = $('<article class="song">').html(songHtml);
             _this._views.getCurrentPlaylistsContainer().append($song);
+        }, function (error) {
+            console.log(error);
         });
-
-
     }
 
     function attachEvents() {
         var _this = this;
+
         _this._views.getSongsContainer().on('click', '.album', function (e) {
             var album = $(e.target).text();
             loadSongs.call(_this, 'album', album);
@@ -178,6 +194,24 @@ app.controller = (function () {
 
         _this._views.getSongsContainer().on('click', '.addToPlayerList', addSongToPlayer);
 
+        _this._views.getSongsContainer().on('click', '.addSongToPlaylistButton', function (e) {
+            var songId = $(e.target).parent().attr('id');
+            sessionStorage.setItem('songId', songId);
+            loadPlaylists.call(_this);
+        });
+
+        _this._views.getPlaylistsContainer().on('click', 'h1', function (e) {
+            var songId = sessionStorage['songId'];
+            var playlistSongs = $(e.target).attr('data-songs').split(',');
+            var playlistId = $(e.target).parent().parent().parent().find('.controls').attr('id');
+            if(songId){
+                playlistSongs.push(songId);
+                addSongToPlaylist.call(_this, songId, playlistId, playlistSongs);
+                delete sessionStorage['songId'];
+            }
+            loadSongsOfPlaylist.call(_this, e)
+        })
+
         $('body').on('click', '#upload-button', function (e) {
             _this._views.songUploadForm(function (file, song) {
                 _this._data.files.upload(file, function (data) {
@@ -229,25 +263,33 @@ app.controller = (function () {
             loadPlaylists.call(_this);
         });
 
+        $('body').on('click', '#create-playlists-button', function (e) {
+            _this._views.showPlaylistForm(function (e) {
+                var $form = $(e.target).parent().parent().parent();
+                var playlistName = $form.find('input').val();
+                _this._data.playlists.addRow({name: playlistName, songs: []}, function () {
+                    console.log('The playlist is added.');
+                } , function () {
+                    console.log('The playlist is not added.');
+                });
+
+                $form.remove();
+            });
+        });
+
         // Comments section appear after clicking the comments button
         _this._views.getSongsContainer().on('click', '.commentsButton', function (event) {
             var isClicked = $(event.target).attr('clicked');
 
             var $songSection = $(event.target).parent().parent().parent();
 
-            if (isClicked==="false"||isClicked===undefined) {
+            if (isClicked === "false" || isClicked === undefined) {
                 _this._views.addComment($songSection);
                 $(event.target).attr('clicked', 'true');
             } else {
                 $(event.target).attr('clicked', 'false');
                 $songSection.find('.comments').remove()
             }
-        });
-
-
-        $('#showAll').on('click', function (e) {
-            var genre = $(e.target).text();
-            loadSongs.call(_this);
         });
     }
 
