@@ -73,7 +73,7 @@ app.controller = (function () {
 
     function loadPlaylists() {
         var _this = this;
-        _this._views.getSongsContainer().hide();
+        $('main > *').hide();
         _this._views.getPlaylistsContainer().html('');
         _this._views.getPlaylistsContainer().show();
         _this._data.playlists.readAllRows(function (playlists) {
@@ -85,8 +85,28 @@ app.controller = (function () {
         }, function () {
             console.log('Can not load playlists.')
         });
-    }
 
+        _this._views.getPlaylistsContainer().on('click', 'h1', function (e) {
+            loadSongsOfPlaylist.call(_this, e)
+        })
+    }
+    
+
+    function loadSongsOfPlaylist(e){
+        var _this = this;
+        var playlistTitle = $(e.target).text();
+        var songs = $(e.target).attr('data-songs').split(',');
+        $('main > *').hide();
+        _this._views.getCurrentPlaylistsContainer().html('');
+        _this._views.getCurrentPlaylistsContainer().show();
+        songs.forEach(function (song) {
+            var songHtml = $('article #' + song).parent().parent().parent().html();
+            var $song = $('<article class="song">').html(songHtml);
+            _this._views.getCurrentPlaylistsContainer().append($song);
+        });
+
+
+    }
 
     function attachEvents() {
         var _this = this;
