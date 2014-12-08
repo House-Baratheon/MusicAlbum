@@ -97,3 +97,7 @@ button a {
 .song .playButton {
     cursor: pointer;
 }
+
+#playlists .songName {
+cursor: pointer;
+}
