@@ -1,12 +1,18 @@
+<script src="./libs/moment.min.js" type="text/javascript"></script>
+
 <div class="songForm">
-    <h1>Choice music file</h1>
+    <h1>Choose music file</h1>
+    <audio id="audio"></audio>
     <input id="upload" type="file" placeholder="Upload file">
 
     <div id="edit-forms">
-        <input type="text" placeholder="Song Title" id="songName">
-        <input type="text" placeholder="Artist" id="artist">
-        <input type="text" placeholder="Album" id="album">
-        <input type="text" placeholder="Genre" id="genre">
+        <input type="text" placeholder="Song Title" id="songName"/>
+        <input type="text" placeholder="Artist" id="artist"/>
+        <input type="text" placeholder="Album" id="album"/>
+        <input type="text" placeholder="Genre" id="genre"/>
+        <input type="hidden"  id="size"/>
+        <input type="hidden"  id="duration"/>
+
         <div>
             <button  class="editSongButton" id="saveButton">Save</button>
             <button class="editSongButton" id="cancelButton">Cancel</button>
