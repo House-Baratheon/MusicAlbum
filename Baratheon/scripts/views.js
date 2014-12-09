@@ -5,7 +5,6 @@ app.views = (function () {
     var $formContainer = $('main');
     var $playlistsContainer = $('#playlists');
     var $currentPlaylistsContainer = $('#current-playlists');
-    //var $commentsContainer = $('');
 
     function song(song) {
         var $song = $('<article class="song">').load('htmlElements/song.html', function () {
@@ -132,10 +131,6 @@ app.views = (function () {
         return $currentPlaylistsContainer;
     }
 
-    //function getCommentsContainer() {
-    //    return $commentsContainer;
-    //}
-
     // Form for adding a comment
     function addComment (songSection) {
         var $addComment = $('<section class="comments">').load('htmlElements/addComment.html',
@@ -174,6 +169,5 @@ app.views = (function () {
         getPlaylistsContainer : getPlaylistsContainer,
         getCurrentPlaylistsContainer: getCurrentPlaylistsContainer,
         addComment: addComment
-       //, getCommentsContainer: getCommentsContainer
     };
 })();

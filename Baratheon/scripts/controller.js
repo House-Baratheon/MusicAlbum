@@ -10,7 +10,6 @@ app.controller = (function () {
     Controller.prototype.load = function () {
         loadSongs.call(this);
         attachEvents.call(this);
-        //loadComments.call(this);
     };
 
 
@@ -106,18 +105,20 @@ app.controller = (function () {
         _this._views.getCurrentPlaylistsContainer().html('');
         _this._views.getCurrentPlaylistsContainer().show();
         songs.forEach(function (song) {
-            if ($('article #' + song).length) {
-                var songHtml = $('article #' + song).parent().parent().parent().html();
-                var $song = $('<article class="song">').html(songHtml);
-                _this._views.getCurrentPlaylistsContainer().append($song);
-            } else {
-                var index = songs.indexOf(song);
-                var playlistId = $(e.target).parent().parent().parent().find('.controls').attr('id');
-                songs.splice(index, 1);
-                _this._data.playlists.editRow(playlistId, {songs: songs}, function (data) {
-                }, function (error) {
-                    console.log(error);
-                });
+            if (song) {
+                if ($('article #' + song).length) {
+                    var songHtml = $('article #' + song).parent().parent().parent().html();
+                    var $song = $('<article class="song">').html(songHtml);
+                    _this._views.getCurrentPlaylistsContainer().append($song);
+                } else {
+                    var index = songs.indexOf(song);
+                    var playlistId = $(e.target).parent().parent().parent().find('.controls').attr('id');
+                    songs.splice(index, 1);
+                    _this._data.playlists.editRow(playlistId, {songs: songs}, function (data) {
+                    }, function (error) {
+                        console.log(error);
+                    });
+                }
             }
         });
     }
@@ -282,89 +283,16 @@ app.controller = (function () {
         _this._views.getSongsContainer().on('click', '.commentsButton', function (event) {
             var isClicked = $(event.target).attr('clicked');
 
-            var $songSection = $(event.target).parent();
+            var $songSection = $(event.target).parent().parent().parent();
 
             if (isClicked === "false" || isClicked === undefined) {
                 _this._views.addComment($songSection);
                 $(event.target).attr('clicked', 'true');
-
             } else {
                 $(event.target).attr('clicked', 'false');
                 $songSection.find('.comments').remove()
             }
-
-            _this._views.getSongsContainer().on('click', '#submit', function (e) {
-                if ($(e.target).is("#submit")) {
-                    var textComments = $('#text-comments').val();
-                    if(textComments) {
-                        console.log(textComments);
-                    }
-                    textComments = $('#text-comments').val('');
-                    console.log("Here we were supposed to send the comments to the parse.com table :)")
-                }
-            });
-
-
         });
-
-        //function loadComments(column, value) {
-        //    var _this = this;
-        //    _this._views.getSongsContainer().html('');
-        //    function successCommentFunction(dataSongs) {
-        //        _this._data.users.readAllRows(function (dataUploader) {
-        //                var uploaders = [];
-        //
-        //                dataUploader.forEach(function (uploader) {
-        //                    uploaders[uploader.objectId] = uploader;
-        //                });
-        //
-        //                dataSongs.forEach(function (song) {
-        //                    song.uploader = uploaders[song.uploader.objectId];
-        //                    _this._views.song(song);
-        //                });
-        //            },
-        //            function () {
-        //                console.log('Can not read users');
-        //            });
-        //    }
-        //
-        //    function errorSongsFunction() {
-        //        console.log('Can not read comments');
-        //    }
-        //
-        //    if (column && value) {
-        //        _this._data.songsComments.readAllRowsWhere(column, value, successSongFunction, errorSongsFunction);
-        //    } else {
-        //        _this._data.songsComments.readAllRows(successSongFunction, errorSongsFunction);
-        //    }
-        //}
-
-
-        _this._views.getPlaylistsContainer().on('click', '.commentsButton', function (event) {
-            var isClicked = $(event.target).attr('clicked');
-
-            var $playlistSection = $(event.target).parent();
-
-            if (isClicked === "false" || isClicked === undefined) {
-                _this._views.addComment($playlistSection);
-                $(event.target).attr('clicked', 'true');
-            } else {
-                $(event.target).attr('clicked', 'false');
-                $playlistSection.find('.comments').remove()
-            }
-
-            _this._views.getPlaylistsContainer().on('click', '#submit', function (e) {
-                if ($(e.target).is("#submit")) {
-                    var textPlaylistComments = $('#text-comments').val();
-                    if(textPlaylistComments) {
-                        console.log(textPlaylistComments);
-                    }
-                    textPlaylistComments = $('#text-comments').val('');
-                    console.log("Here we were supposed to send the comments to the parse.com table :)")
-                }
-            });
-
-        })
     }
 
     return {
