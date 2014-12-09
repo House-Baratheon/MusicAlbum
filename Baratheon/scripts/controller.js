@@ -235,7 +235,7 @@ app.controller = (function () {
                     {
                         "album": song.album,
                         "artist": song.artist,
-                        "duration": "2:46",
+                        "duration": song.duration,
                         "file": fileObj,
                         "genre": song.genre,
                         "name": song.name,

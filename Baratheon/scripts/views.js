@@ -77,7 +77,8 @@ app.views = (function () {
     function songUploadForm(yesFunction, noFunction) {
         var $songForm = $('<div class="forms">').load('htmlElements/songUploadForm.html', function () {
             var file,
-                files;
+                files,
+                objectUrl;
             $songForm.find('#edit-forms').hide();
             $formContainer.append($songForm);
 
@@ -85,33 +86,84 @@ app.views = (function () {
                 files = e.target.files || e.dataTransfer.files;
                 file = files[0];
                 var url = file.name;
-                ID3.loadTags(url, function(){
+
+                objectUrl = URL.createObjectURL(file);
+                $("#audio").prop("src", objectUrl);
+
+                var duration = (function canGetDuration(){
+                    $(" #audio").on("canplaythrough", function (e) {
+                        var seconds = e.currentTarget.duration;
+                        var duration = moment.duration(seconds, "seconds");
+
+                        var time = "";
+                        var hours = duration.hours();
+                        if (hours > 0) { time = hours + ":"; }
+                            time = time + duration.minutes() + ":" + duration.seconds();
+
+                        window.URL.revokeObjectURL(objectUrl);
+                    });
+                })();
+
+                ID3.loadTags(url, function () {
                     var tags = ID3.getAllTags(url);
                     $songForm.find('#edit-forms').show();
                     $songForm.find('#songName').val(tags.title);
                     $songForm.find('#album').val(tags.album);
                     $songForm.find('#artist').val(tags.artist);
                     $songForm.find('#genre').val(tags.genre);
-                }, {tags: ["artist", "title", "album", "year", "comment", "track", "genre", "lyrics", "picture"],
+                    $songForm.find('#size').val(humanFileSize(file.size, 1024));
+                }, {tags: ["artist", "title", "album", "year", "comment", "track","genre", "lyrics", "picture"],
                     dataReader: FileAPIReader(file)});
             });
 
-            $songForm.on('click', '#saveButton', function(){
+            $songForm.on('click', '#saveButton', function () {
                 var song = {
                     name: $songForm.find('#songName').val(),
                     artist: $songForm.find('#artist').val(),
-                    album : $songForm.find('#album').val(),
-                    genre: $songForm.find('#genre').val()
+                    album: $songForm.find('#album').val(),
+                    genre: $songForm.find('#genre').val(),
+                    duration: $songForm.find('#duration').text(),
+                    size: $songForm.find('#size').val()
                 };
 
                 $songForm.remove();
                 yesFunction(file, song);
             });
 
-            $songForm.on('click', '#cancelButton', function(){
+            $songForm.on('click', '#cancelButton', function () {
                 $songForm.remove();
                 noFunction();
             });
+
+            var objectUrl;
+
+            $(" #audio").on("canplaythrough", function (e) {
+                var seconds = e.currentTarget.duration;
+                var duration = moment.duration(seconds, "seconds");
+
+                var time = "";
+                var hours = duration.hours();
+                if (hours > 0) {
+                    time = hours + ":";
+                }
+
+                time = time + duration.minutes() + ":" + duration.seconds();
+                $("#duration").text(time);
+
+                window.URL.revokeObjectURL(objectUrl);
+            });
+
+            function humanFileSize(bytes, si) {
+                var thresh = si ? 1000 : 1024;
+                if (bytes < thresh) return bytes + ' B';
+                var units = si ? ['kB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'] : ['KiB', 'MiB', 'GiB', 'TiB', 'PiB', 'EiB', 'ZiB', 'YiB'];
+                var u = -1;
+                do {
+                    bytes /= thresh;
+                    ++u;
+                } while (bytes >= thresh);
+                return bytes.toFixed(1) + ' ' + units[u];
+            };
         });
     }
 
@@ -132,7 +184,7 @@ app.views = (function () {
     }
 
     // Form for adding a comment
-    function addComment (songSection) {
+    function addComment(songSection) {
         var $addComment = $('<section class="comments">').load('htmlElements/addComment.html',
 
             function () {
@@ -148,7 +200,7 @@ app.views = (function () {
 
     function showPlaylists(playlists) {
         $.get('htmlElements/playlists.html', function (template) {
-            var output = Mustache.render(template, {playlists : playlists});
+            var output = Mustache.render(template, {playlists: playlists});
             $playlistsContainer.html(output);
         });
     }
@@ -166,7 +218,7 @@ app.views = (function () {
         getSongsContainer: getSongsContainer,
         showPlaylistForm: showPlaylistForm,
         getFormContainer: getFormContainer,
-        getPlaylistsContainer : getPlaylistsContainer,
+        getPlaylistsContainer: getPlaylistsContainer,
         getCurrentPlaylistsContainer: getCurrentPlaylistsContainer,
         addComment: addComment
     };
