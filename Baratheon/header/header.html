@@ -4,18 +4,20 @@
 <script src="./scripts/showUploadStatistics.js" type="text/javascript"></script>
 <script src="./libs/moment.min.js" type="text/javascript"></script>
 
-<nav class="navMenu">
-    <ul>
-        <li class="navLi"><a href="index.html"><img class="buttonImg"alt="vinyl"/><p class="menuText">Music</p></a></li>
-        <li><a id="upload-button"><img class="buttonImg" alt="vinyl"/><p class="menuText">Upload</p></a></li>
-        <li><a id="playlists-button"><img class="buttonImg" alt="vinyl"/><p class="menuText">Playlist</p></a></li>
-        <li><a href="#"><img class="buttonImg" alt="vinyl"/><p class="menuText">Create</p></a></li>
-    </ul>
-</nav>
+<div id="wrapper-header">
+    <div class="logo">
+        <a href="index.html">
+            <img class="imgLogo" alt="an elk"></a>
+    </div>
 
-<div class="logo">
-    <a href="index.html">
-    <img class="imgLogo" alt="an elk"></a>
+    <nav class="navMenu">
+        <ul>
+            <li class="navLi"><a href="index.html"><img class="buttonImg"alt="vinyl"/><p class="menuText">Music</p></a></li>
+            <li><a id="upload-button"><img class="buttonImg" alt="vinyl"/><p class="menuText">Upload</p></a></li>
+            <li><a id="playlists-button"><img class="buttonImg" alt="vinyl"/><p class="menuText">Playlist</p></a></li>
+            <li><a href="#"><img class="buttonImg" alt="vinyl"/><p class="menuText">Create</p></a></li>
+        </ul>
+    </nav>
 </div>
 
 <div id="element_to_pop_up">
@@ -27,7 +29,7 @@
                 <p>Select a .mp3 file</p>
                 <input type="file" name="fileselect" id="fileselect"/>
 
-                <div id="statistics">
+                <div id="file-information-upload">
                     <audio id="audio"></audio>
 
                     <p>

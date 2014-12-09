@@ -1,3 +1,8 @@
+*{
+    padding:0;
+    margin:0;
+    box-sizing:border-box;
+}
 
 button {
     cursor: pointer;
@@ -20,7 +25,6 @@ main {
     font-size: 20px;
     margin-bottom: 10px;
     text-align: center;
-
     height: 25px;
     border-radius: 2px;
     background-color: #FFFFFF;
@@ -53,9 +57,8 @@ main {
 
 .comments {
     position: absolute;
-    right: 5px;
-    margin-top: -85px;
-    margin: 0px;
+    right: 0px;
+    margin: -85px 0px 0px 0px;
 }
 
 textarea{
@@ -88,11 +91,8 @@ body{
 
 .logo{
     width: 153px;
-    height: 121px;
-    margin: 10px;
-    padding-bottom: 32px;
-    margin-left: 7em;
-    margin-top: -13em;
+    display: inline-block;
+    margin: 3em;
 }
 
 .imgLogo{
@@ -107,16 +107,20 @@ body{
 }
 
 #header{
-    max-width: 120em;
-    margin: 10px;
+
+    max-width: 105em;
     padding: 10px;
-    margin:  0 auto;
+    margin: 0 auto;
     background-color: #F25835;
+    border: 2px solid #D1A413;
+    border-radius: 25px;
 }
 
 .navMenu{
-    margin-top: 7em;
-    margin-left: 45em;
+    display: inline-block;
+    margin: 4em;
+    margin-left: 21em;
+    vertical-align: 71px;
 }
 
 .navMenu ul li{
@@ -180,10 +184,12 @@ body{
 
 #section{
     max-width: 120em;
-    margin: 10px;
     padding: 10px;
     margin:  0 auto;
     background-color:#F25835;
+    border: 2px solid #D1A413;
+    border-radius: 25px;
+
 }
 
 .songForm {
@@ -267,7 +273,7 @@ html {
 }
 
 .song .songInfo, .song .uploaderName {
-    font-size: 12px;
+    font-size: 1em;
 }
 
 .songIcon {
@@ -281,14 +287,20 @@ html {
 
 .addToPlayerList {
     width: 70px;
-    height: 55px;
+    height: 66px;
     text-align: center;
-    line-height: 27px;
+    line-height: 19px;
     margin-bottom: 12px;
     margin-right: 10px;
     background-color: #D1A413;
-    border-radius: 20px;
-    font-size: 13.5px;
+    border-radius: 100%;
+    font-size: 13px;
+    padding: 11px;
+}
+
+.addToPlayerList:hover {
+    background-color: #6BCCF2;
+
 }
 
 .song .songFooter {
@@ -301,9 +313,13 @@ html {
 }
 
 .song .controls {
-    font-size: 8px;
+    font-size: 1em;
+    margin-top: -28px;
 }
 
+.song .controls button,.song .controls div{
+    padding: 2px;
+}
 .song .statistics img {
     width: 15px;
     height: 15px;
