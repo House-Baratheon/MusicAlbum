@@ -1,0 +1,32 @@
+{{#playlists}}
+<article class="song">
+    <img class="songIcon" src="images/default-song-icon.png">
+    <section>
+        <div class="songHeader">
+            <div>
+                <h1 class="songName" data-songs="{{songs}}">{{name}}</h1>
+
+                <div class="songInfo">
+                    Songs: <span class="album" title="Album">{{number}}</span>
+                </div>
+            </div>
+        </div>
+        <div class="songFooter">
+            <section class="statistics">
+                <span class="rating">{{rating}}</span>/5
+                <img src="images/yellow_star.png" alt="yellow star">
+                <img src="images/yellow_star.png" alt="yellow star">
+                <img src="images/yellow_star.png" alt="yellow star">
+                <img src="images/star.png" alt="star">
+                <img src="images/star.png" alt="star">
+            </section>
+            <section class="controls" id="{{objectId}}">
+                <button class="commentsButton">Comments</button>
+                <button class="editSong">Edit</button>
+                <button class="deleteSong">Delete</button>
+            </section>
+        </div>
+        <!--<section class="comments"></section>-->
+    </section>
+</article>
+{{/playlists}}
